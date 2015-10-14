@@ -178,6 +178,79 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/14/version/" itemprop="url">
+                语义化版本（转载）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-14T08:41:41+08:00" content="2015-10-14">
+            2015-10-14
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/14/version/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/version/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="description">版本格式：主版本号.次版本号.修订号，版本号递增规则如下： 主版本号：当你做了不兼容的 API 修改， 次版本号：当你做了向下兼容的功能性新增， 修订号：当你做了向下兼容的问题修正。 先行版本号及版本编译信息可以加到“主版本号.次版本号.修订号”的后面，作为延伸。</span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/14/version/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/09/cocos-xxtea/" itemprop="url">
                 cocos2d-x使用python脚本加密资源(xxtea)（草稿）
               </a>
@@ -227,19 +300,12 @@
 
       
         
-          <span itemprop="articleBody"><blockquote><p>本文适用于cocos2d-x 3.x 版本</p>
-</blockquote>  
-<h2 id="引擎分析">引擎分析</h2><p>cocos2d-x 3.x 版本lua自带xxtea加密,在引起目录/external/xxtea 里面可以看到xxtea.h   和 xxtea.cpp ，打开一个cocos2d-x lua 的工程在 Classes 文件夹 AppDelegate.cpp 里面可以看到这样一行代码: </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>-&gt;setXXTEAKeyAndSign(<span class="string">"2dxLua"</span>, <span class="built_in">strlen</span>(<span class="string">"2dxLua"</span>), <span class="string">"XXTEA"</span>, <span class="built_in">strlen</span>(<span class="string">"XXTEA"</span>));</span><br></pre></td></tr></table></figure>
-<p>可以看到这里面主要传递了两个参数 key 和 sign ，其中 key 是 xxtea 加密解密用的，sign 用来标记文件是否加密用的，比如 一个字符串 ‘123abc’ 使用xxtea 加密之后 为 ‘xxxxxx’ 最终保存的时候需要在前面拼接上 sign 的值变成 ‘signxxxxxx’，引擎根据前面是否有sign来判断是否需要解密。</p>
-<h2 id="python_xxtea加密文件">python xxtea加密文件</h2><p>为了保证跟引擎的一致性，用python直接调用里面的xxtea.h 和 xxtea.cpp， 把两个文件拷贝出来，同时新建一个叫xxtea_Encrypt.cpp的文件，里面的代码如下:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">"xxtea.h"</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;python2.7/Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">PyObject* <span class="title">xxtea_encrypt</span><span class="params">(PyObject* self, PyObject* args)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> *data = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> *key = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> dataLen = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> keyLen = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> retLen = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (! PyArg_ParseTuple(args, <span class="string">"s#s#"</span>, &amp;data,&amp;dataLen,&amp;key,&amp;keyLen))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> * encrypt = xxtea_encrypt(data,dataLen,key,keyLen,&amp;retLen);	</span><br><span class="line">	<span class="keyword">return</span> Py_BuildValue(<span class="string">"s#"</span>,encrypt,retLen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">PyObject* <span class="title">xxtea_decrypt</span><span class="params">(PyObject* self, PyObject* args)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> *data = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> *key = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> dataLen = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> keyLen = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> retLen = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (! PyArg_ParseTuple(args, <span class="string">"s#s#"</span>, &amp;data,&amp;dataLen,&amp;key,&amp;keyLen))</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> * decrypt = xxtea_decrypt(data,dataLen,key,keyLen,&amp;retLen);	</span><br><span class="line">	<span class="keyword">return</span> Py_BuildValue(<span class="string">"s#"</span>,decrypt,retLen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> PyMethodDef xxteaMethods[] =</span><br><span class="line">&#123;</span><br><span class="line">	&#123;<span class="string">"encrypt"</span>, xxtea_encrypt, METH_VARARGS, <span class="string">"xxteaEncrypt"</span>&#125;,</span><br><span class="line">	&#123;<span class="string">"decrypt"</span>, xxtea_decrypt, METH_VARARGS, <span class="string">"xxteaDecrypt"</span>&#125;,</span><br><span class="line">	&#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">PyMODINIT_FUNC <span class="title">initxxteaModule</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	PyObject* m;</span><br><span class="line">	m = Py_InitModule(<span class="string">"xxteaModule"</span>, xxteaMethods);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在终端中cd 进入到 刚才创建的文件中<br>执行如下命令<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc python setup<span class="class">.py</span> build</span><br></pre></td></tr></table></figure></p>
-<p>得到xxteaModule.so （在build 文件夹）拷贝出来，创建一个xxtea-cocos.py的脚本放同一个目录</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">__author__ = <span class="string">'heshaohu'</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> xxteaModule</span><br><span class="line"></span><br><span class="line"><span class="comment">#需要的参数</span></span><br><span class="line">file_path = <span class="string">"/Users/heshaohu/Desktop/assets"</span></span><br><span class="line">xxtea_key = <span class="string">"2dxLua"</span></span><br><span class="line">xxtea_sign = <span class="string">"XXTEA"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># #上一级路径</span></span><br><span class="line"><span class="comment"># file_root = os.path.abspath(os.path.join(file_path,os.path.pardir))</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copyEncryptionFiles</span><span class="params">(source_dir, target_dir)</span>:</span></span><br><span class="line">    <span class="comment">#去掉 . 开头的隐藏文件</span></span><br><span class="line">    <span class="keyword">if</span> source_dir.find(<span class="string">'.'</span>) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        source_file = os.path.join(source_dir, file)</span><br><span class="line">        target_file = os.path.join(target_dir,file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.mkdir(target_dir)</span><br><span class="line">        <span class="comment">#只加密png</span></span><br><span class="line">        <span class="keyword">if</span> source_file.find(<span class="string">'.png'</span>) &gt; <span class="number">0</span>:</span><br><span class="line">            f = open(source_file, <span class="string">"rb"</span>).read()</span><br><span class="line">            data = xxtea_sign + xxteaModule.encrypt(f,xxtea_key)</span><br><span class="line">            open(target_file, <span class="string">"wb"</span>).write(data)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copyEncryptionFiles(source_file,target_file)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        des_path = <span class="string">"%s_%d"</span>%(file_path, i)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(des_path):</span><br><span class="line">            os.mkdir(des_path)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    copyEncryptionFiles(file_path, des_path)</span><br></pre></td></tr></table></figure>
-<p>把 file_path （要加密的文件夹） xxtea_key xxtea_sign 改成自己需要的值<br>终端运行 python xxtea-cocos.py 就会加密所文件夹中所有的图片了（加密其他文件请修改27行的if判断）。 </p>
-<p>引擎如何解密图片请参考cocos 官方教程<br><a href="http://www.cocos.com/doc/tutorial/show?id=2317" target="_blank" rel="external">http://www.cocos.com/doc/tutorial/show?id=2317</a></p>
-</span>
+          <span itemprop="description">使用python脚本批量加密所有素材资源和lua脚本，提高发布效率。加密首选cocos 自己集成的xxtea....</span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/09/cocos-xxtea/">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -293,7 +359,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
