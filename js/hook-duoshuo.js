@@ -14,12 +14,10 @@ function hook_duoshuo_templates() {
 	var _D_post = DUOSHUO.templates.post;
 	DUOSHUO.templates.post = function(e, t) {
 		var rs = _D_post(e, t);
-		var is_admin;
-		if (e.post.author.user_id && (e.post.author.user_id == duoshuo_user_ID)) {
-			is_admin = '<span class="this_ua admin">博主</span>'
-		} else {
-			is_admin = '';
-		}
+		var is_admin = '';
+		// if (e.post.author.user_id && (e.post.author.user_id == duoshuo_user_ID)) {
+		// 	is_admin = '<span class="this_ua admin">博主</span>'
+		// } 
 		var agent = e.post.agent;
 		if (agent && /^Mozilla/.test(agent)) {
 			rs = rs.replace(/<\/div><p>/, is_admin + show_ua(agent) + '</div><p>')
