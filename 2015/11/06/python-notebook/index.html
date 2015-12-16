@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="旅行," />
+  <meta name="keywords" content="小虎,博客,iOS,cocos2dx,lua,android,移动开发,html5,python,C++,java,linux,Mac,django,Hexo,next" />
 
 
 
@@ -37,17 +37,31 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description">
+<meta name="description" content="挂机一晚上爬虫，本以为万无一失，早上起来去发现报了个
+RuntimeError: maximum recursion depth exceeded 的错误
+查了下，发现python默认的递归深度是很有限的，大概是900多的样子，当递归深度超过这个值的时候，就会引发这样的一个异常。
+解决方案：
+import sys
+sys.setrecursionlimit(1000000)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="旅行">
-<meta property="og:url" content="http://www.heshaohu.com/2015/10/18/travel/index.html">
+<meta property="og:title" content="错误笔记（python）">
+<meta property="og:url" content="http://www.heshaohu.com/2015/11/06/python-notebook/index.html">
 <meta property="og:site_name" content="小虎学习笔记">
-<meta property="og:description">
-<meta property="og:image" content="http://www.heshaohu.com/2015/10/18/travel/q3.jpg">
-<meta property="og:updated_time" content="2015-10-21T15:31:51.000Z">
+<meta property="og:description" content="挂机一晚上爬虫，本以为万无一失，早上起来去发现报了个
+RuntimeError: maximum recursion depth exceeded 的错误
+查了下，发现python默认的递归深度是很有限的，大概是900多的样子，当递归深度超过这个值的时候，就会引发这样的一个异常。
+解决方案：
+import sys
+sys.setrecursionlimit(1000000)">
+<meta property="og:updated_time" content="2015-11-06T01:00:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="旅行">
-<meta name="twitter:description">
+<meta name="twitter:title" content="错误笔记（python）">
+<meta name="twitter:description" content="挂机一晚上爬虫，本以为万无一失，早上起来去发现报了个
+RuntimeError: maximum recursion depth exceeded 的错误
+查了下，发现python默认的递归深度是很有限的，大概是900多的样子，当递归深度超过这个值的时候，就会引发这样的一个异常。
+解决方案：
+import sys
+sys.setrecursionlimit(1000000)">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -57,7 +71,7 @@
   };
 </script>
 
-    <title> 旅行 // 小虎学习笔记 </title>
+    <title> 错误笔记（python） // 小虎学习笔记 </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -178,7 +192,7 @@
           
           
             
-              旅行
+              错误笔记（python）
             
           
         </h1>
@@ -187,8 +201,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-10-18T22:33:16+08:00" content="2015-10-18">
-            2015-10-18
+          <time itemprop="dateCreated" datetime="2015-11-06T08:49:20+08:00" content="2015-11-06">
+            2015-11-06
           </time>
         </span>
 
@@ -198,8 +212,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/10/18/travel/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/18/travel/" itemprop="commentsCount"></span>
+              <a href="/2015/11/06/python-notebook/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/06/python-notebook/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -213,31 +227,28 @@
       
 
       
-        <span itemprop="articleBody"><img src="/2015/10/18/travel/q3.jpg" alt="[青岛]" title="[青岛]">
-</span>
+        <span itemprop="articleBody"><p>挂机一晚上爬虫，本以为万无一失，早上起来去发现报了个</p>
+<p>RuntimeError: maximum recursion depth exceeded 的错误</p>
+<p>查了下，发现python默认的递归深度是很有限的，大概是900多的样子，当递归深度超过这个值的时候，就会引发这样的一个异常。</p>
+<p>解决方案：</p>
+<pre><code>import sys
+sys.<span class="function"><span class="title">setrecursionlimit</span><span class="params">(<span class="number">1000000</span>)</span></span>
+</code></pre></span>
       
     </div>
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/旅行/" rel="tag">#旅行</a>
-          
-        </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/21/360web/" rel="prev">360浏览器兼容性</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/10/14/version/" rel="next">语义化版本（转载）</a>
+              <a href="/2015/10/21/360web/" rel="next">360浏览器兼容性</a>
             
           </div>
         </div>
@@ -252,10 +263,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/10/18/travel/"
-     data-title="旅行"
+        <div class="ds-share flat" data-thread-key="2015/11/06/python-notebook/"
+     data-title="错误笔记（python）"
      data-content=""
-     data-url="http://www.heshaohu.com/2015/10/18/travel/">
+     data-url="http://www.heshaohu.com/2015/11/06/python-notebook/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -282,8 +293,8 @@
             
               <div class="comments" id="comments">
                 
-                  <div class="ds-thread" data-thread-key="2015/10/18/travel/"
-                       data-title="旅行" data-url="http://www.heshaohu.com/2015/10/18/travel/">
+                  <div class="ds-thread" data-thread-key="2015/11/06/python-notebook/"
+                       data-title="错误笔记（python）" data-url="http://www.heshaohu.com/2015/11/06/python-notebook/">
                   </div>
                 
               </div>
